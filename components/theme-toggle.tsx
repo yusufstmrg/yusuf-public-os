@@ -15,6 +15,7 @@ export function ThemeToggle() {
       : (document.documentElement.dataset.theme as Theme) || "dark";
     document.documentElement.dataset.theme = current;
     document.documentElement.style.colorScheme = current;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate persisted preference after the browser is available.
     setTheme(current);
   }, []);
 

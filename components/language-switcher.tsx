@@ -47,6 +47,7 @@ export function LanguageSwitcher() {
   useEffect(() => {
     const saved = window.localStorage.getItem("yusuf-language");
     const next = saved === "id" ? "id" : "en";
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate persisted preference after the browser is available.
     setLang(next);
     applyLanguage(next);
   }, [pathname]);
