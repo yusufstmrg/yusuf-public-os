@@ -1,12 +1,11 @@
 import type { MetadataRoute } from "next";
-import { getDb } from "@/lib/db/server";
+import { getPublishedProjectDates } from "@/lib/db/publications";
+
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://yusuf-platform.vercel.app";
-  const db = getDb();
-  const projectRows = db
-    ? await db`SELECT public_slug, published_at FROM public.public_publications WHERE entity_type='project' ORDER BY published_at DESC LIMIT 100`
-    : [];
+  const projectRows = await getPublishedProjectDates(100);
   const projectUrls = projectRows.map((item: { public_slug: string; published_at: string }) => ({
     url: `${baseUrl}/projects/${item.public_slug}`,
     lastModified: new Date(item.published_at),

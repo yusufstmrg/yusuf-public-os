@@ -36,6 +36,7 @@ export function SiteNav() {
           ))}
         </div>
         <div className="nav-actions">
+          <Link className="nav-os-link" href="/os">Private OS</Link>
           <Link className="nav-cta" href="/contact" data-i18n="contact">Contact Me</Link>
           <LanguageSwitcher />
           <ThemeToggle />
@@ -49,6 +50,7 @@ export function SiteNav() {
           {links.map(([label, href, key]) => (
             <Link key={label} className={isActive(pathname, href) ? "active" : ""} href={href} onClick={() => setOpen(false)} data-i18n={key}>{label}</Link>
           ))}
+          <Link className="mobile-nav-os" href="/os" onClick={() => setOpen(false)}>Private OS</Link>
           <div className="mobile-controls">
             <LanguageSwitcher />
             <ThemeToggle />
