@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, MessageCircle, ShieldCheck } from "lucide-react";
 import { building } from "@/lib/content";
 import { whatsappMessage } from "@/lib/whatsapp";
-import { getDb } from "@/lib/db/server";
+import { getPublishedProjects } from "@/lib/db/publications";
 
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -11,10 +11,7 @@ export const metadata = {
 };
 
 export default async function ProjectsPage() {
-  const db = getDb();
-  const publications = db
-    ? await db`SELECT public_slug, public_title, public_summary, public_payload, published_at FROM public.public_publications WHERE entity_type='project' ORDER BY published_at DESC LIMIT 40`
-    : [];
+  const publications = await getPublishedProjects(40);
 
   return (
     <main className="section section-white">

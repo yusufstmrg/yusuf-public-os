@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, MessageCircle, ShieldCheck } from "lucide-react";
 import { building } from "@/lib/content";
 import { whatsappMessage } from "@/lib/whatsapp";
-import { getDb } from "@/lib/db/server";
+import { getPublishedProject } from "@/lib/db/publications";
 
 export const dynamic = "force-dynamic";
 
@@ -12,19 +12,15 @@ function slugify(value: string) {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const db = getDb();
-  if (db) {
-    const rows = await db`SELECT public_title, public_summary FROM public.public_publications WHERE entity_type='project' AND public_slug=${slug} LIMIT 1`;
-    if (rows[0]) return { title: `${rows[0].public_title} — Project`, description: rows[0].public_summary ?? "Published project case study." };
-  }
+  const published = await getPublishedProject(slug);
+  if (published) return { title: `${published.public_title} — Project`, description: published.public_summary ?? "Published project case study." };
   const item = building.find((project) => slugify(project.title) === slug);
   return { title: item ? `${item.title} — Project` : "Project — Yusuf B. Situmorang", description: item?.text ?? "Project detail page for Yusuf B. Situmorang." };
 }
 
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const db = getDb();
-  const published = db ? (await db`SELECT public_title, public_summary, public_payload, published_at FROM public.public_publications WHERE entity_type='project' AND public_slug=${slug} LIMIT 1`)[0] : null;
+  const published = await getPublishedProject(slug);
   const item = building.find((project) => slugify(project.title) === slug);
 
   if (!published && !item) return <main className="section section-white"><div className="container"><div className="kicker">Project not found</div><h1 style={{fontSize:"clamp(44px,7vw,76px)",marginBottom:20}}>This project page does not exist.</h1><Link className="btn btn-dark" href="/projects"><ArrowLeft size={15}/> Back to projects</Link></div></main>;
