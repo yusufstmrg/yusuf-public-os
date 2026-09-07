@@ -21,6 +21,7 @@ export default function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("from", pathname);
+    url.searchParams.set("callbackUrl", pathname);
     url.searchParams.set("reason", "auth_setup");
     return NextResponse.redirect(url);
   }

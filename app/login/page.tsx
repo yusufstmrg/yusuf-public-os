@@ -7,7 +7,15 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ from?: string; reason?: string; callbackUrl?: string }>;
+}) {
+  const params = (await searchParams) ?? {};
+  const callbackUrl = params.callbackUrl || params.from || "/os";
+  const authUrl = `/auth/sign-in?callbackUrl=${encodeURIComponent(callbackUrl)}`;
+
   return (
     <main className="section section-white" style={{ minHeight: "100svh", display: "grid", placeItems: "center" }}>
       <div className="container" style={{ maxWidth: 920 }}>
@@ -26,7 +34,7 @@ export default function LoginPage() {
             <LockKeyhole size={20} />
             <h3>Private Personal OS</h3>
             <p>Command Center, life strategy, goals, sprint, quick capture, skills, career, proof, brand, network, business, wealth, purpose and reviews.</p>
-            <Link className="btn btn-dark" href="/auth/sign-in" style={{ marginTop: 20 }}>
+            <Link className="btn btn-dark" href={authUrl} style={{ marginTop: 20 }}>
               Sign in securely <ArrowUpRight size={15} />
             </Link>
           </div>
@@ -43,7 +51,7 @@ export default function LoginPage() {
         <div className="notice" style={{ marginTop: 28, padding: 20, border: "1px solid rgba(17,37,54,.14)", borderRadius: 18, background: "#f6f8fa" }}>
           <strong>Neon Auth is now the authentication foundation.</strong>
           <p style={{ margin: "8px 0 0" }}>
-            Complete the two Vercel environment variables in the deployment setup before enabling private production access. The public website remains available without login.
+            Private access is protected by Neon Auth. If sign-in is unavailable, the deployment still needs its server cookie secret configured; this is never exposed to visitors. The public website remains available without login.
           </p>
         </div>
       </div>
