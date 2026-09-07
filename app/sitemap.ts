@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getPublishedProjectDates } from "@/lib/db/publications";
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://yusuf-platform.vercel.app";
   const projectRows = await getPublishedProjectDates(100);
