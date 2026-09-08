@@ -35,8 +35,8 @@ export default async function PersonalOsPage() {
       (SELECT COUNT(*) FROM public.deals WHERE owner_id=${user.id}::uuid) AS deals,
       (SELECT COUNT(*) FROM public.next_best_actions WHERE owner_id=${user.id}::uuid AND status NOT IN ('done','completed')) AS next_actions`,
     db`SELECT personal_value FROM public.score_snapshots WHERE owner_id=${user.id}::uuid ORDER BY snapshot_date DESC LIMIT 1`,
-  ]);
-  const s=summary[0];
+  ]).catch(() => [[], []] as [Array<Record<string, unknown>>, Array<Record<string, unknown>>]);
+  const s=summary[0] ?? {};
   const metricByPath: Record<string,string> = {
     "/os": `${Number(s.open_tasks ?? 0)} open tasks`,
     "/os/strategy": `${Number(s.goals ?? 0)} goals`,
