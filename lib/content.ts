@@ -1,10 +1,10 @@
 export const profile = {
   name: "Yusuf B. Situmorang",
   shortName: "Yusuf",
-  title: "Finance Professional • Builder • Lifelong Learner",
+  title: "Senior Accountant & Tax • Founder • Builder",
   positioning: "Finance × Business × AI × Growth",
   philosophy: "Build. Serve. Grow. Give.",
-  intro: "I work at the intersection of finance, business and emerging technology—turning numbers into insight, and insight into action.",
+  intro: "I am a Senior Accountant & Tax professional and founder building at the intersection of financial discipline, global trade, business systems and emerging technology.",
   location: "Kebayoran Baru, Jakarta Selatan, Indonesia",
   linkedin: "https://www.linkedin.com/in/yusufbsitumorang/",
   instagram: "https://www.instagram.com/yusufstmrg/",
@@ -23,9 +23,10 @@ export const expertise = [
 ];
 
 export const experience = [
-  { period: "Current", role: "Senior Accountant & Tax", company: "Arkara Energi", text: "Finance, accounting and tax responsibilities in the coal mining industry, with a focus on reporting, compliance, controls and decision support." },
-  { period: "5+ years", role: "Finance, Accounting & Tax Experience", company: "Cross-industry experience", text: "Progressive experience across accounting, tax, reporting, ERP/accounting systems and finance operations." },
-  { period: "Founder", role: "Founder", company: "Tradevance Global Resources", text: "Building an international trading and resource-supply venture alongside a professional finance career." },
+  { period: "Dec 2024 — Present", role: "Senior Accountant & Tax", company: "PT Arkara Prathama Energi", text: "Owns financial reporting, production cost, tax reconciliation, audit support and accounting controls in the coal mining industry." },
+  { period: "Dec 2025 — Present", role: "Founder", company: "PT Tradevance Global Resources", text: "Building an international trade and strategic resources venture connecting trusted suppliers, buyers and long-term partnerships." },
+  { period: "Dec 2022 — Oct 2024", role: "Senior Accountant & Tax", company: "AROBS Group", text: "Managed reporting, multi-bank reconciliation, inventory, intercompany support and Indonesian tax work across a software and fleet-management group." },
+  { period: "5+ years", role: "Finance, Accounting & Tax", company: "Cross-industry experience", text: "Progressive experience across accounting, audit, tax, ERP systems, project operations and business support." },
 ];
 
 export const building = [
