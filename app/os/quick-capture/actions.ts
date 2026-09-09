@@ -24,10 +24,15 @@ export async function createQuickCapture(
   const db = getDb();
   if (!db) return { ok: false, message: "Database is not connected to this deployment yet." };
 
-  await db`
-    INSERT INTO public.quick_captures (owner_id, raw_text)
-    VALUES (${user.id}::uuid, ${rawText})
-  `;
+  try {
+    await db`
+      INSERT INTO public.quick_captures (owner_id, raw_input)
+      VALUES (${user.id}::uuid, ${rawText})
+    `;
+  } catch (error) {
+    console.error("[v0] Quick Capture save failed", error);
+    return { ok: false, message: "Capture belum tersimpan. Database belum siap atau session perlu dimuat ulang." };
+  }
 
   revalidatePath("/os/quick-capture");
   revalidatePath("/os");

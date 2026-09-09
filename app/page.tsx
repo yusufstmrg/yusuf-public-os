@@ -70,8 +70,8 @@ export default function Home() {
 
           <div className="hero-proof-bar reveal">
             <article><span className="proof-icon"><Target size={19}/></span><strong>5+</strong><span>Years</span><small>Finance, accounting & tax</small></article>
-            <article><span className="proof-icon"><Briefcase size={19}/></span><strong>20+</strong><span>Projects</span><small>Finance • business • technology</small></article>
-            <article><span className="proof-icon"><GraduationCap size={19}/></span><strong>7+</strong><span>Certifications</span><small>Finance • analytics • technology</small></article>
+            <article><span className="proof-icon"><Briefcase size={19}/></span><strong>5+</strong><span>Projects</span><small>Finance • business • technology</small></article>
+            <article><span className="proof-icon"><GraduationCap size={19}/></span><strong>Certified</strong><span>Tax Brevet A &amp; B</span><small>Indonesian tax certification</small></article>
             <article><span className="proof-icon"><TrendingUp size={19}/></span><strong>AI</strong><span>+ Technology</span><small>Automation • data • software</small></article>
             <article><span className="proof-icon"><Heart size={19}/></span><strong>Purpose</strong><span>Driven</span><small>Build • Serve • Grow • Give</small></article>
           </div>
