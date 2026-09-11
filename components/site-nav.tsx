@@ -37,6 +37,7 @@ export function SiteNav() {
         </div>
         <div className="nav-actions">
           <Link className="nav-os-link" href="/os">Private OS</Link>
+          {pathname.startsWith("/os") && <Link className="nav-os-link" href="/os/analytics">Analytics</Link>}
           <Link className="nav-cta" href="/contact" data-i18n="contact">Contact Me</Link>
           <LanguageSwitcher />
           <ThemeToggle />
