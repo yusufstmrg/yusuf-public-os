@@ -9,10 +9,10 @@ export const metadata = { title: "Intelligence — Yusuf Personal OS", robots: {
 export default async function IntelligencePage() {
   const { user, db } = await requirePrivateDb();
   const [actions, recs, insights, scores] = await Promise.all([
-    db`SELECT id, title, reason, impact_score, effort_minutes, priority_rank, status, due_date FROM public.next_best_actions WHERE owner_id=${user.id}::uuid ORDER BY priority_rank ASC NULLS LAST, impact_score DESC NULLS LAST LIMIT 25`,
-    db`SELECT id, title, rationale, expected_impact, effort_minutes, status, created_at FROM public.ai_recommendations WHERE owner_id=${user.id}::uuid ORDER BY created_at DESC LIMIT 20`,
-    db`SELECT id, insight_type, title, summary, confidence, created_at FROM public.ai_insights WHERE owner_id=${user.id}::uuid ORDER BY created_at DESC LIMIT 20`,
-    db`SELECT snapshot_date, capability, proof, distribution, network, commercialization, ownership, personal_value FROM public.score_snapshots WHERE owner_id=${user.id}::uuid ORDER BY snapshot_date DESC LIMIT 1`,
+    db`SELECT id, title, reason, impact_score, effort_minutes, priority_rank, status, due_date FROM public.next_best_actions WHERE owner_id=${user.id}::uuid ORDER BY priority_rank ASC NULLS LAST, impact_score DESC NULLS LAST LIMIT 25`.catch(() => []),
+    db`SELECT id, title, rationale, expected_impact, effort_minutes, status, created_at FROM public.ai_recommendations WHERE owner_id=${user.id}::uuid ORDER BY created_at DESC LIMIT 20`.catch(() => []),
+    db`SELECT id, insight_type, title, summary, confidence, created_at FROM public.ai_insights WHERE owner_id=${user.id}::uuid ORDER BY created_at DESC LIMIT 20`.catch(() => []),
+    db`SELECT snapshot_date, capability, proof, distribution, network, commercialization, ownership, personal_value FROM public.score_snapshots WHERE owner_id=${user.id}::uuid ORDER BY snapshot_date DESC LIMIT 1`.catch(() => []),
   ]);
   const s=scores[0];
   return <main className="os-shell"><div className="container">
