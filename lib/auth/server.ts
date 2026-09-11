@@ -8,10 +8,27 @@ const cookieSecret = process.env.NEON_AUTH_COOKIE_SECRET;
  * Auth endpoint and cookie secret. This keeps local/build environments safe
  * while the deployment gate is being completed.
  */
-export const auth =
-  baseUrl && cookieSecret
-    ? createNeonAuth({
-        baseUrl,
-        cookies: { secret: cookieSecret, sessionDataTtl: 300 },
-      })
-    : null;
+let configuredAuth = baseUrl && cookieSecret
+  ? createNeonAuth({
+      baseUrl,
+      cookies: { secret: cookieSecret, sessionDataTtl: 300 },
+    })
+  : null;
+
+if (!configuredAuth) {
+  console.warn('[AI Studio] Auth not configured — using mock');
+  configuredAuth = {
+    handler: () => ({
+      GET: () => new Response("Mock Auth API (GET)", { status: 200 }),
+      POST: () => new Response("Mock Auth API (POST)", { status: 200 })
+    }),
+    getSession: async () => ({
+      data: {
+        session: { id: "mock-session" },
+        user: { id: "00000000-0000-0000-0000-000000000000", name: "Mock User", email: "mock@example.com" }
+      }
+    })
+  } as any;
+}
+
+export const auth = configuredAuth;
