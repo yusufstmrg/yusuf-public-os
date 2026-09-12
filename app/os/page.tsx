@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, BriefcaseBusiness, CircleGauge, Coins, Flag, Layers3, ListChecks, Sparkles, Target, UserRoundCheck } from "lucide-react";
-import { UserButton } from "@neondatabase/auth-ui";
+import { UserMenu } from "@/components/user-menu";
 import { requirePrivateDb } from "@/lib/os/server";
 
 export const dynamic = "force-dynamic";
@@ -57,7 +57,7 @@ export default async function PersonalOsPage() {
           <h1>Command your next move.</h1>
           <p className="section-lead">Private command center for turning strategy into execution, execution into proof, and proof into higher personal value, opportunity and freedom.</p>
         </div>
-        <div className="os-user"><div><strong>{user.name || "Yusuf"}</strong><span>{user.email}</span></div><UserButton /></div>
+        <div className="os-user"><UserMenu user={user} /></div>
       </header>
 
       <section className="os-hero-grid">

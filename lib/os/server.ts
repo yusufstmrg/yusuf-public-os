@@ -5,6 +5,7 @@ import { getDb } from "@/lib/db/server";
 type Db = NonNullable<ReturnType<typeof getDb>>;
 
 export async function requirePrivateDb(): Promise<{ user: { id: string; name?: string | null; email: string }; db: Db }> {
+  console.log("requirePrivateDb auth:", auth ? "exists" : "null/undefined");
   if (!auth) redirect("/login?reason=auth_setup");
   const result = await auth.getSession();
   const session = result.data?.session;
