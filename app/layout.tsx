@@ -4,6 +4,7 @@ import "./globals.css";
 import "./overrides.css";
 import { Providers } from "./providers";
 import { AnalyticsTracker } from "@/components/analytics-tracker";
+import { Analytics } from '@vercel/analytics/next';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://yusuf-platform.vercel.app";
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem("yusuf-theme");if(t!=="light"&&t!=="dark")t="dark";document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.dataset.theme="dark";document.documentElement.style.colorScheme="dark";}})()` }} />
         <Providers>{children}</Providers>
         <AnalyticsTracker />
+        <Analytics />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
       </body>
     </html>
